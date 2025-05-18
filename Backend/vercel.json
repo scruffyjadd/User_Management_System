@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "DATABASE_HOST": "${DATABASE_HOST}",
+    "DATABASE_PORT": "${DATABASE_PORT}",
+    "DATABASE_USER": "${DATABASE_USER}",
+    "DATABASE_PASSWORD": "${DATABASE_PASSWORD}",
+    "DATABASE_NAME": "${DATABASE_NAME}",
+    "JWT_SECRET": "${JWT_SECRET}",
+    "EMAIL_FROM": "${EMAIL_FROM}",
+    "SMTP_HOST": "${SMTP_HOST}",
+    "SMTP_PORT": "${SMTP_PORT}",
+    "SMTP_USER": "${SMTP_USER}",
+    "SMTP_PASS": "${SMTP_PASS}"
+  }
+}

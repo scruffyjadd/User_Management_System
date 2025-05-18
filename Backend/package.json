@@ -1,0 +1,58 @@
+{
+    "name": "employee-management-api",
+    "version": "1.0.0",
+    "description": "Full-stack Employee Management System with Authentication, Departments, and Workflows",
+    "license": "MIT",
+    "scripts": {
+        "start": "node ./server.js",
+        "start:dev": "nodemon ./server.js",
+        "migrate": "node ./_helpers/migrate.js",
+        "seed": "node ./_helpers/seed.js",
+        "setup:db": "powershell -ExecutionPolicy Bypass -File .\\setup-db.ps1",
+        "lint": "eslint . --ext .js",
+        "lint:fix": "eslint . --ext .js --fix",
+        "test": "cross-env NODE_ENV=test jest --coverage",
+        "test:watch": "cross-env NODE_ENV=test jest --watch",
+        "test:coverage": "cross-env NODE_ENV=test jest --coverage --coverageDirectory='coverage'",
+        "build": "echo 'No build needed for Node.js backend'",
+        "dev": "npm run start:dev",
+        "vercel-build": "echo 'No build needed for Node.js backend'"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.2",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.0",
+        "express": "^4.17.3",
+        "express-jwt": "^6.1.1",
+        "express-rate-limit": "^7.5.0",
+        "express-validator": "^6.14.0",
+        "helmet": "^5.0.2",
+        "joi": "^17.6.0",
+        "jsonwebtoken": "^8.5.1",
+        "moment": "^2.29.2",
+        "morgan": "^1.10.0",
+        "mysql2": "^2.3.3",
+        "nodemailer": "^6.7.3",
+        "rootpath": "^0.1.2",
+        "sequelize": "^6.17.0",
+        "swagger-jsdoc": "^6.2.1",
+        "swagger-ui-express": "^4.3.0",
+        "winston": "^3.6.0",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "eslint": "^8.12.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^27.5.1",
+        "nodemon": "^2.0.15",
+        "prettier": "^2.6.2",
+        "supertest": "^6.3.4"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}

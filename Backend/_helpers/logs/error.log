@@ -1,0 +1,9 @@
+2025-05-17 18:11:50 [31merror[39m: SequelizeAccessDeniedError: Access denied for user ''@'210.23.169.219' (using password: YES)
+    at ConnectionManager.connect (D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:94:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ConnectionManager._connect (D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\sequelize.js:305:26
+    at async Sequelize.authenticate (D:\Windsurf Codes\User-Management-System\Backend\node_modules\sequelize\lib\sequelize.js:457:5)
+    at async verifyAdminAccount (D:\Windsurf Codes\User-Management-System\Backend\_helpers\verify-admin.js:23:9)

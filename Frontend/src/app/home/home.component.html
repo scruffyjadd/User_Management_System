@@ -1,0 +1,52 @@
+<div class="home-container">
+  <div class="home-header">
+    <div class="home-header-content">
+      <h1>Welcome, {{ (account$ | async)?.firstName }} {{ (account$ | async)?.lastName }}</h1>
+      <p class="welcome-message">Manage your account and access all features</p>
+    </div>
+  </div>
+
+  <div class="home-content">
+    <div class="dashboard-cards">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Quick Actions</h3>
+          <div class="quick-actions">
+            <div class="action-item">
+              <i class="fas fa-user-plus"></i>
+              <p>Create New Account</p>
+              <a routerLink="/accounts" class="btn btn-primary btn-sm">Go</a>
+            </div>
+            <div class="action-item">
+              <i class="fas fa-edit"></i>
+              <p>Edit Profile</p>
+              <a routerLink="/profile" class="btn btn-primary btn-sm">Go</a>
+            </div>
+            <div class="action-item">
+              <i class="fas fa-cog"></i>
+              <p>Settings</p>
+              <a routerLink="/settings" class="btn btn-primary btn-sm">Go</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title">Recent Activities</h3>
+          <div class="activities-list">
+            <div *ngFor="let activity of recentActivities" class="activity-item">
+              <div class="activity-icon">
+                <i class="fas fa-circle" [ngClass]="activity.iconClass"></i>
+              </div>
+              <div class="activity-content">
+                <p>{{ activity.description }}</p>
+                <small class="text-muted">{{ activity.timestamp | date:'mediumTime' }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

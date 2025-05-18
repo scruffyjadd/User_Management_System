@@ -1,0 +1,15 @@
+@import './login.component.scss';
+
+.login-form {
+  .form-row {
+    .col-5 {
+      flex: 0 0 45%;
+      max-width: 45%;
+      margin-right: 5%;
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-header-content">
+      <div class="profile-avatar">
+        <img [src]="getAvatarUrl()" alt="Profile" class="avatar-image" />
+      </div>
+      <div class="profile-info">
+        <h1>{{ account$ | async as account; account.firstName }} {{ account.lastName }}</h1>
+        <p class="profile-email">{{ account.email }}</p>
+        <p class="profile-role">{{ account.role }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <div class="profile-tabs">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#profile-info" role="tab">Profile Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#change-password" role="tab">Change Password</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#account-settings" role="tab">Account Settings</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Profile Info Tab -->
+        <div class="tab-pane fade show active" id="profile-info" role="tabpanel">
+          <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="profile-form">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                  <input type="text" 
+                         id="firstName" 
+                         formControlName="firstName" 
+                         class="form-control" 
+                         [ngClass]="{ 'is-invalid': submitted && profileForm.get('firstName')?.errors }" 
+                         placeholder="Enter your first name" />
+                </div>
+                <div *ngIf="submitted && profileForm.get('firstName')?.errors" class="invalid-feedback d-block">
+                  <div *ngIf="profileForm.get('firstName')?.errors?.['required']">First Name is required</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </div>
+                  <input type="text" 
+                         id="lastName" 
+                         formControlName="lastName" 
+                         class="form-control" 
+                         [ngClass]="{ 'is-invalid': submitted && profileForm.get('lastName')?.errors }" 
+                         placeholder="Enter your last name" />
+                </div>
+                <div *ngIf="submitted && profileForm.get('lastName')?.errors" class="invalid-feedback d-block">
+                  <div *ngIf="profileForm.get('lastName')?.errors?.['required']">Last Name is required</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <input type="email" 
+                       id="email" 
+                       formControlName="email" 
+                       class="form-control" 
+                       [ngClass]="{ 'is-invalid': submitted && profileForm.get('email')?.errors }" 
+                       placeholder="Enter your email" />
+              </div>
+              <div *ngIf="submitted && profileForm.get('email')?.errors" class="invalid-feedback d-block">
+                <div *ngIf="profileForm.get('email')?.errors?.['required']">Email is required</div>
+                <div *ngIf="profileForm.get('email')?.errors?.['email']">Please enter a valid email address</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary btn-block">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Update Profile
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Change Password Tab -->
+        <div class="tab-pane fade" id="change-password" role="tabpanel">
+          <form [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="profile-form">
+            <div class="form-group">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </div>
+                <input type="password" 
+                       id="currentPassword" 
+                       formControlName="currentPassword" 
+                       class="form-control" 
+                       [ngClass]="{ 'is-invalid': submitted && passwordForm.get('currentPassword')?.errors }" 
+                       placeholder="Enter your current password" />
+              </div>
+              <div *ngIf="submitted && passwordForm.get('currentPassword')?.errors" class="invalid-feedback d-block">
+                <div *ngIf="passwordForm.get('currentPassword')?.errors?.['required']">Current Password is required</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword" class="form-label">New Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </div>
+                <input type="password" 
+                       id="newPassword" 
+                       formControlName="newPassword" 
+                       class="form-control" 
+                       [ngClass]="{ 'is-invalid': submitted && passwordForm.get('newPassword')?.errors }" 
+                       placeholder="Enter your new password" />
+              </div>
+              <div *ngIf="submitted && passwordForm.get('newPassword')?.errors" class="invalid-feedback d-block">
+                <div *ngIf="passwordForm.get('newPassword')?.errors?.['required']">New Password is required</div>
+                <div *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">Password must be at least 6 characters</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword" class="form-label">Confirm New Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                  </span>
+                </div>
+                <input type="password" 
+                       id="confirmPassword" 
+                       formControlName="confirmPassword" 
+                       class="form-control" 
+                       [ngClass]="{ 'is-invalid': submitted && passwordForm.get('confirmPassword')?.errors }" 
+                       placeholder="Confirm your new password" />
+              </div>
+              <div *ngIf="submitted && passwordForm.get('confirmPassword')?.errors" class="invalid-feedback d-block">
+                <div *ngIf="passwordForm.get('confirmPassword')?.errors?.['required']">Confirm Password is required</div>
+                <div *ngIf="passwordForm.get('confirmPassword')?.errors?.['mustMatch']">Passwords must match</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary btn-block">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Account Settings Tab -->
+        <div class="tab-pane fade" id="account-settings" role="tabpanel">
+          <div class="settings-section">
+            <h3>Account Settings</h3>
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" 
+                       id="emailNotifications" 
+                       class="form-check-input" 
+                       [ngModel]="settings.emailNotifications" 
+                       (ngModelChange)="updateSettings('emailNotifications', $event)" />
+                <label class="form-check-label" for="emailNotifications">Receive email notifications</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" 
+                       id="darkMode" 
+                       class="form-check-input" 
+                       [ngModel]="settings.darkMode" 
+                       (ngModelChange)="updateSettings('darkMode', $event)" />
+                <label class="form-check-label" for="darkMode">Enable dark mode</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="form-check">
+                <input type="checkbox" 
+                       id="twoFactorAuth" 
+                       class="form-check-input" 
+                       [ngModel]="settings.twoFactorAuth" 
+                       (ngModelChange)="updateSettings('twoFactorAuth', $event)" />
+                <label class="form-check-label" for="twoFactorAuth">Enable two-factor authentication</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

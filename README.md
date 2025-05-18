@@ -1,89 +1,127 @@
-# User Management System
+# Employee Management System - Backend API
 
-A full-stack application for managing user accounts and authentication. This system provides a secure and efficient way to handle user registration, authentication, and account management.
+This is a full-stack employee management system built with Node.js, Express, MySQL, and Angular. The backend provides a RESTful API for user authentication, employee management, department management, workflow tracking, and request handling.
 
-## Project Structure
+## Key Features
 
-The project is split into two main parts:
+- **User Authentication**
+  - Email-based registration with verification
+  - JWT authentication with access + refresh tokens
+  - Role-based access control (Admin/User)
+  - Password reset functionality
 
-- **Backend**: Node.js/Express server with Sequelize ORM for MySQL database
-- **Frontend**: Angular application for the user interface
+- **Employee Management**
+  - CRUD operations for employees
+  - Department assignment and transfers
+  - Employee status tracking (active, on leave, terminated)
+
+- **Department Management**
+  - Create and manage departments
+  - Track employee count and department hierarchy
+
+- **Workflow System**
+  - Track employee-related actions (transfers, status changes, etc.)
+  - Status management (Pending/Approved/Rejected)
+  - Audit trail of all actions
+
+- **Request System**
+  - Employees can submit requests (equipment, leave, resources)
+  - Admin approval workflow
+  - Status tracking for requests
 
 ## Tech Stack
 
-### Backend
-- **Framework**: Node.js/Express
-- **Database**: MySQL
-- **ORM**: Sequelize
-- **Authentication**: JWT
-- **Security**: Helmet, Rate Limiting
-- **Testing**: Jest
-
-### Frontend
-- **Framework**: Angular
-- **Language**: TypeScript
-- **Styling**: Bootstrap
-- **State Management**: RxJS
-- **Testing**: Karma, Jasmine
+- **Backend**: Node.js with Express
+- **Database**: MySQL with Sequelize ORM
+- **Authentication**: JWT (JSON Web Tokens)
+- **API Documentation**: Swagger/OpenAPI
+- **Logging**: Winston
+- **Security**: Helmet, CORS, rate limiting
+- **Email**: Nodemailer
+- **Validation**: Joi, Express Validator
 
 ## Prerequisites
 
-- Node.js (v16 or later)
-- npm (v8 or later)
-- MySQL Server
-- Angular CLI (for frontend development)
+Before you begin, ensure you have the following installed:
 
-## Backend Setup
+- Node.js (v14 or later recommended)
+- npm (comes with Node.js)
+- MySQL Server (v5.7 or later)
+- Git (for version control)
 
-1. **Install dependencies**
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/Full-Stack-App.git
+cd Full-Stack-App/Backend
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Environment Setup
+
+1. Copy the `.env.example` file to `.env`:
    ```bash
-   cd Backend
-   npm install
+   copy .env.example .env
    ```
 
-2. **Configure environment**
-   - Copy `.env.example` to `.env` and update the following variables:
-     ```
-     DB_HOST=153.92.15.31
-     DB_PORT=3306
-     DB_NAME=u875409848_nudalo
-     DB_USER=u875409848_nudalo
-     DB_PASSWORD=9T2Z5$3UKkgSYzE
-     ```
+2. Update the `.env` file with your configuration:
+   ```env
+   # Server Configuration
+   NODE_ENV=development
+   PORT=4000
+   
+   # Database Configuration
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_NAME=employee_management
+   DB_USER=root
+   DB_PASSWORD=your_mysql_password
+   
+   # JWT Configuration
+   JWT_SECRET=your_jwt_secret_key_here
+   JWT_REFRESH_SECRET=your_refresh_token_secret_here
+   JWT_EXPIRATION=1h
+   JWT_REFRESH_EXPIRATION=7d
+   
+   # Email Configuration (for password reset, etc.)
+   SMTP_HOST=smtp.ethereal.email
+   SMTP_PORT=587
+   SMTP_USER=your_ethereal_username
+   SMTP_PASSWORD=your_ethereal_password
+   EMAIL_FROM=noreply@employeeapp.com
+   
+   # API Configuration
+   API_BASE_URL=/api
+   API_DOCS_URL=/api-docs
+   
+   # Security
+   CORS_ORIGINS=http://localhost:4200,http://localhost:3000
+   RATE_LIMIT_WINDOW_MS=900000  # 15 minutes
+   RATE_LIMIT_MAX=100
+   
+   # Logging
+   LOG_LEVEL=debug
+   LOG_TO_FILE=true
+   ```
 
 3. **Set up the database**
    ```powershell
-   cd Backend
    .\setup-db.ps1
    ```
 
 4. **Start the server**
    ```powershell
-   cd Backend
-   npm run start
+   .\start-server.ps1
    ```
 
-The backend will run on `http://localhost:4000` by default.
-
-## Frontend Setup
-
-1. **Install dependencies**
-   ```bash
-   cd Frontend
-   npm install
-   ```
-
-2. **Start the development server**
-   ```bash
-   cd Frontend
-   npm start
-   ```
-
-The frontend will run on `http://localhost:4200` by default.
-
-## API Documentation
-
-API documentation is available at `/api-docs` when the backend server is running.
+The server will run on `http://localhost:4000`.
 
 ## Features
 
@@ -96,6 +134,10 @@ API documentation is available at `/api-docs` when the backend server is running
 - Rate limiting
 - API documentation with Swagger
 
+## API Documentation
+
+Available at `/api-docs` when the server is running.
+
 ## Security Features
 
 - Password hashing using bcrypt
@@ -105,99 +147,90 @@ API documentation is available at `/api-docs` when the backend server is running
 - CSRF protection
 - XSS protection
 
-## License
+## Testing
 
-MIT
-
-## Development Server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-# Start the development server
-ng serve
-
-# Or use the start script
-npm start
+Run tests using:
+```bash
+npm test
 ```
+
+## Development Scripts
+
+- `setup-db.ps1`: Initialize database and run migrations
+- `start-server.ps1`: Start the development server
+- `run-tests.ps1`: Run test suite
+- `install-deps.ps1`: Install dependencies
+
+### 4. Database Setup
+
+1. Create a new MySQL database:
+   ```sql
+   CREATE DATABASE employee_management;
+   ```
+
+2. Run database migrations:
+   ```bash
+   npm run migrate
+   ```
+
+3. (Optional) Seed the database with initial data:
+   ```bash
+   npm run seed
+   ```
+
+### 5. Start the Development Server
+
+```bash
+# Using npm script
+npm run start:dev
+
+# Or using the PowerShell script (Windows)
+.\start-server.ps1
+```
+
+The API will be available at `http://localhost:4000`
+
+## API Documentation
+
+Once the server is running, you can access the interactive API documentation at:
+- Swagger UI: `http://localhost:4000/api-docs`
+- API Base URL: `http://localhost:4000/api`
 
 ## Project Structure
 
 ```
-src/app/
-├── account/          # Authentication related components (login, register, etc.)
-├── admin/            # Admin dashboard and management components
-├── home/             # Public landing page and home components
-├── profile/          # User profile management
-├── _components/      # Shared components
-├── _helpers/         # Helper services and utilities
-├── _models/          # Data models and interfaces
-├── _services/        # Core services (authentication, HTTP, etc.)
-└── app.module.ts     # Root module configuration
+backend/
+├── config/                 # Configuration files
+├── controllers/            # Route controllers
+├── middleware/             # Custom middleware
+├── models/                 # Database models
+├── routes/                 # Route definitions
+├── services/               # Business logic
+├── utils/                  # Utility classes and functions
+├── validations/            # Request validation schemas
+├── .env                    # Environment variables
+├── .env.example            # Example environment variables
+├── server.js               # Application entry point
+└── package.json            # Project metadata and dependencies
 ```
 
-## Build
+## Available Scripts
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- `npm start` - Start the production server
+- `npm run start:dev` - Start the development server with hot-reload
+- `npm run migrate` - Run database migrations
+- `npm run seed` - Seed the database with initial data
+- `npm test` - Run tests
+- `npm run lint` - Run ESLint
 
-```bash
-# Development build
-ng build
+## Security Considerations
 
-# Production build
-ng build --configuration production
-```
-
-## Testing
-
-### Unit Tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-```bash
-# Run tests in watch mode
-ng test
-
-# Run tests once and generate coverage report
-ng test --no-watch --code-coverage
-```
-
-### End-to-End Tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
-
-```bash
-# Run e2e tests
-ng e2e
-```
-
-## Code Scaffolding
-
-Use Angular CLI to generate new components, services, and more:
-
-```bash
-# Generate a new component
-ng generate component component-name
-
-# Generate a new service
-ng generate service service-name
-
-# Generate a new module
-ng generate module module-name
-```
-
-## Linting and Code Formatting
-
-```bash
-# Run linter
-ng lint
-
-# Fix linting issues automatically
-ng lint --fix
-```
-
-## Deployment
-
-For production deployment, build the application with the production configuration and deploy the contents of the `dist/` directory to your web server.
+- All passwords are hashed using bcrypt
+- JWT tokens are used for authentication
+- Rate limiting is enabled to prevent brute force attacks
+- CORS is configured to only allow requests from trusted origins
+- Helmet middleware is used to secure HTTP headers
+- Input validation is implemented for all API endpoints
 
 ## License
 

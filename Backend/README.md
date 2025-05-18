@@ -111,6 +111,56 @@ npm install
    LOG_TO_FILE=true
    ```
 
+3. **Set up the database**
+   ```powershell
+   .\setup-db.ps1
+   ```
+
+4. **Start the server**
+   ```powershell
+   .\start-server.ps1
+   ```
+
+The server will run on `http://localhost:4000`.
+
+## Features
+
+- User registration and authentication
+- JWT-based authentication
+- Password reset functionality
+- Email verification
+- Role-based access control
+- Secure password hashing
+- Rate limiting
+- API documentation with Swagger
+
+## API Documentation
+
+Available at `/api-docs` when the server is running.
+
+## Security Features
+
+- Password hashing using bcrypt
+- JWT token-based authentication
+- Rate limiting to prevent brute force attacks
+- Helmet middleware for HTTP headers security
+- CSRF protection
+- XSS protection
+
+## Testing
+
+Run tests using:
+```bash
+npm test
+```
+
+## Development Scripts
+
+- `setup-db.ps1`: Initialize database and run migrations
+- `start-server.ps1`: Start the development server
+- `run-tests.ps1`: Run test suite
+- `install-deps.ps1`: Install dependencies
+
 ### 4. Database Setup
 
 1. Create a new MySQL database:

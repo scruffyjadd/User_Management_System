@@ -1,50 +1,118 @@
-# Frontend Application
+# User Management System
 
-This is an Angular-based frontend application that provides a user interface for authentication, user management, and profile handling. It's designed to work with the Node.js/Express backend API.
+A full-stack application for managing user accounts and authentication. This system provides a secure and efficient way to handle user registration, authentication, and account management.
+
+## Project Structure
+
+The project is split into two main parts:
+
+- **Backend**: Node.js/Express server with Sequelize ORM for MySQL database
+- **Frontend**: Angular application for the user interface
 
 ## Tech Stack
 
-- **Framework**: Angular 17.3.0
+### Backend
+- **Framework**: Node.js/Express
+- **Database**: MySQL
+- **ORM**: Sequelize
+- **Authentication**: JWT
+- **Security**: Helmet, Rate Limiting
+- **Testing**: Jest
+
+### Frontend
+- **Framework**: Angular
 - **Language**: TypeScript
-- **Styling**: Bootstrap 5.3.5
-- **State Management**: RxJS (Reactive Extensions for JavaScript)
-- **Testing**: 
-  - Karma (unit tests)
-  - Jasmine (test framework)
-  - Protractor (e2e tests)
-- **Build Tool**: Angular CLI
-- **Package Manager**: npm
+- **Styling**: Bootstrap
+- **State Management**: RxJS
+- **Testing**: Karma, Jasmine
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed:
-
-- Node.js (v16 or later recommended)
+- Node.js (v16 or later)
 - npm (v8 or later)
-- Angular CLI (v17.3.0 or later)
+- MySQL Server
+- Angular CLI (for frontend development)
 
-## Getting Started
+## Backend Setup
 
-1. **Clone the repository** (if you haven't already)
+1. **Install dependencies**
    ```bash
-   git clone <repository-url>
-   cd Full-Stack-App/Frontend
-   ```
-
-2. **Install dependencies**
-   ```bash
+   cd Backend
    npm install
    ```
 
-3. **Configure environment**
-   - Update the environment configuration in `src/environments/` to point to your backend API
-   - Default API URL is set to `http://localhost:4000`
+2. **Configure environment**
+   - Copy `.env.example` to `.env` and update the following variables:
+     ```
+     DB_HOST=153.92.15.31
+     DB_PORT=3306
+     DB_NAME=u875409848_nudalo
+     DB_USER=u875409848_nudalo
+     DB_PASSWORD=9T2Z5$3UKkgSYzE
+     ```
+
+3. **Set up the database**
+   ```powershell
+   cd Backend
+   .\setup-db.ps1
+   ```
+
+4. **Start the server**
+   ```powershell
+   cd Backend
+   npm run start
+   ```
+
+The backend will run on `http://localhost:4000` by default.
+
+## Frontend Setup
+
+1. **Install dependencies**
+   ```bash
+   cd Frontend
+   npm install
+   ```
+
+2. **Start the development server**
+   ```bash
+   cd Frontend
+   npm start
+   ```
+
+The frontend will run on `http://localhost:4200` by default.
+
+## API Documentation
+
+API documentation is available at `/api-docs` when the backend server is running.
+
+## Features
+
+- User registration and authentication
+- JWT-based authentication
+- Password reset functionality
+- Email verification
+- Role-based access control
+- Secure password hashing
+- Rate limiting
+- API documentation with Swagger
+
+## Security Features
+
+- Password hashing using bcrypt
+- JWT token-based authentication
+- Rate limiting to prevent brute force attacks
+- Helmet middleware for HTTP headers security
+- CSRF protection
+- XSS protection
+
+## License
+
+MIT
 
 ## Development Server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-```bash
 # Start the development server
 ng serve
 

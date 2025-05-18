@@ -3,8 +3,8 @@
 # Set environment variables
 $env:DB_HOST = "153.92.15.31"
 $env:DB_PORT = "3306"
-$env:DB_NAME = "u875409848_nudalo"
-$env:DB_USER = "u875409848_nudalo"
+$env:DB_NAME = "u875409848_serrado"
+$env:DB_USER = "u875409848_serrado"
 $env:DB_PASSWORD = "9T2Z5$3UKkgSYzE"
 
 # Create the database if it doesn't exist
